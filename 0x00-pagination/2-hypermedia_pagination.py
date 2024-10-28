@@ -43,14 +43,15 @@ class Server:
             return []
         return dataset[start: end]
 
-    def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict[str, Union[int, List[list], Optional[int]]]:
+    def get_hyper(self, page: int = 1, page_size: int = 10) -> \
+            Dict[str, Union[int, List[list], Optional[int]]]:
         """ Hypermedia pagination """
         paginated_data = self.get_page(page, page_size)
         total_pages = math.ceil(len(self.__dataset) / page_size)
         next_page = page + 1 if page < total_pages else None
         prev_page = page - 1 if page > 1 else None
 
-        return  {
+        return {
             "page_size": page_size,
             "page": page,
             "data": paginated_data,
