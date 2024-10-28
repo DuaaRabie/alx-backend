@@ -46,6 +46,8 @@ class Server:
     def get_hyper(self, page: int = 1, page_size: int = 10) -> \
             Dict[str, Union[int, List[list], Optional[int]]]:
         """ Hypermedia pagination """
+        assert isinstance(page, int) and page > 0
+        assert isinstance(page_size, int) and page_size > 0
         paginated_data = self.get_page(page, page_size)
         total_pages = math.ceil(len(self.__dataset) / page_size)
         next_page = page + 1 if page < total_pages else None
