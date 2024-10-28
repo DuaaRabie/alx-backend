@@ -43,24 +43,26 @@ class Server:
             return []
         return dataset[start: end]
 
-    def get_hyper(self, page: int = 1, page_size: int = 10) -> \
-            Dict:
+    def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict:
         """ Hypermedia pagination """
+
         assert isinstance(page, int) and page > 0
+
         assert isinstance(page_size, int) and page_size > 0
 
-        paginated_data = self.get_page(page, page_size)
+        data = []
 
-        total_pages = math.ceil(len(self.__dataset) / page_size)
-        next_page = page + 1 if page < total_pages else None
-        prev_page = page - 1 if page > 1 else None
-        page_size = page_size if page <= total_pages else 0
-
+        with open("Popular_Baby_Names.csv") as f:
+            reader = csv.reader(f)
+            for role in reader:
+                data.append(role)
+        data = data[1:]
+        total_pages = math.ceil(len(data) / page_size)
         return {
             "page_size": page_size,
             "page": page,
-            "data": paginated_data,
-            "next_page": next_page,
-            "prev_page": prev_page,
-            "tatal_pages": total_pages
-            }
+            "data": data[(page - 1) * page_size:page * page_size],
+            "next_page": page + 1 if page < total_pages else None,
+            "prev_page": page - 1 if page > 1 else None,
+            "total_pages": total_pages
+        }
