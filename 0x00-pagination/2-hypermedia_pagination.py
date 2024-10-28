@@ -50,12 +50,8 @@ class Server:
 
         assert isinstance(page_size, int) and page_size > 0
 
-        data = []
+        data = self.get_page(page, page_size)
 
-        with open("Popular_Baby_Names.csv") as f:
-            reader = csv.reader(f)
-            for role in reader:
-                data.append(role)
         data = data[1:]
         total_pages = math.ceil(len(data) / page_size)
         return {
