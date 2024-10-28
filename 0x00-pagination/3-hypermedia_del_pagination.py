@@ -41,8 +41,7 @@ class Server:
 
     def get_hyper_index(self, index: int = None, page_size: int = 10) -> Dict:
         """  Deletion-resilient hypermedia pagination """
-	indexed_dataset = self.indexed_dataset()
-
+        indexed_dataset = self.indexed_dataset()
         if index is not None:
             assert 0 <= index < len(indexed_dataset), "Index out of range"
 
