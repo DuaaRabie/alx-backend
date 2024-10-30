@@ -24,7 +24,7 @@ class LRUCache(BaseCaching):
     def get(self, key):
         """ Get an item by key """
         if key in self.cache_data:
-            recently_value  =  self.cache_data.get(key)
+            recently_value = self.cache_data.get(key)
             del self.cache_data[key]
             self.cache_data[key] = recently_value
         return self.cache_data.get(key)
