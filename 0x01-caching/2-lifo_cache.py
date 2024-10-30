@@ -19,7 +19,7 @@ class LIFOCache(BaseCaching):
             if len(self.cache_data) >= BaseCaching.MAX_ITEMS:
                 Last_In, _ = self.cache_data.popitem()
                 print("DISCARD: {}".format(Last_In))
-            self.cache_data[key] = item 
+            self.cache_data[key] = item
 
     def get(self, key):
         """ Get an item by key """
