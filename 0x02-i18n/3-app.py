@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" 2. Get locale from request """
+""" 3. Parametrize templates """
 
 
 from flask import Flask, render_template, request
@@ -21,7 +21,7 @@ babel = Babel(app)
 
 
 @babel.localeselector
-def get_locale():
+def get_locale() -> str:
     """ Determine the best language """
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
@@ -29,7 +29,7 @@ def get_locale():
 @app.route('/')
 def index():
     """Route for the home page"""
-    return render_template('2-index.html')
+    return render_template('3-index.html')
 
 
 if __name__ == "__main__":
